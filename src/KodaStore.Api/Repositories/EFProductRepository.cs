@@ -48,7 +48,7 @@ public sealed class EFProductRepository : IProductRepository
         return await _db.Products.AsNoTracking().OrderBy(p => p.ProductCode).ToListAsync(cancellationToken);
     }
 
-    public async Task<IReadOnlyList<ProductCustomerResponse>> GetAllWithCustomerAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<ProductCustomer>> GetAllWithCustomerAsync(CancellationToken cancellationToken)
     {
         return await _db.Products.AsNoTracking().OrderBy(p => p.ProductCode).ToListAsync(cancellationToken);
     }

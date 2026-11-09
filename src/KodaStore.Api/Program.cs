@@ -2,6 +2,7 @@ using System.Globalization;
 using KodaStore.Api.Data;
 using KodaStore.Api.Middlewares;
 using KodaStore.Api.Repositories;
+using KodaStore.Api.Seeding;
 using KodaStore.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +33,7 @@ var connectionString = builder.Configuration.GetConnectionString("eccomercedb") 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(connectionString);
+    options.UseSqlServer(connectionString).UseSeeding((context, _) => ProductSeedData.Seed(context)).UseAsyncSeeding((context, _, ct) => ProductSeedData.SeedAsync(context, ct));
 });
 
 var app = builder.Build();
