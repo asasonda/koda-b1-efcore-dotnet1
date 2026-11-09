@@ -29,11 +29,11 @@ public sealed class ProductService : IProductService
         return products.Select(ProductResponse.FromModel).ToArray();
     }
 
-    public Task<IReadOnlyList<ProductCustomerResponse>> GetAllWithCustomerAsync(
-    CancellationToken cancellationToken)
-    {
-        return _repository.GetAllWithCustomerAsync(cancellationToken);
-    }
+    // public Task<IReadOnlyList<ProductCustomerResponse>> GetAllWithCustomerAsync(
+    // CancellationToken cancellationToken)
+    // {
+    //     return _repository.GetAllWithCustomerAsync(cancellationToken);
+    // }
 
     public async Task<ProductResponse?> GetByCodeAsync(string productCode, CancellationToken cancellationToken)
     {

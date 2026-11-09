@@ -73,44 +73,44 @@ public sealed class SqlProductRepository : IProductRepository
         return product;
     }
 
-    public async Task<IReadOnlyList<ProductCustomerResponse>> GetAllWithCustomerAsync(
-    CancellationToken cancellationToken)
-    {
-        const string sql = """
-            SELECT
-                p.ProductCode,
-                p.Name,
-                p.Price,
-                p.Stock,
-                p.Category,
-                c.Name,
-                c.Email
-            FROM dbo.Product p
-            JOIN dbo.Customers c
-                ON c.CustomerId = p.CustomerId
-            """;
+    // public async Task<IReadOnlyList<ProductCustomerResponse>> GetAllWithCustomerAsync(
+    // CancellationToken cancellationToken)
+    // {
+    //     const string sql = """
+    //         SELECT
+    //             p.ProductCode,
+    //             p.Name,
+    //             p.Price,
+    //             p.Stock,
+    //             p.Category,
+    //             c.Name,
+    //             c.Email
+    //         FROM dbo.Product p
+    //         JOIN dbo.Customers c
+    //             ON c.CustomerId = p.CustomerId
+    //         """;
 
-        var products = new List<ProductCustomerResponse>();
-        await using var connection = new SqlConnection(_connectionString);
-        await connection.OpenAsync(cancellationToken);
-        await using var command = new SqlCommand(sql, connection);
-        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+    //     var products = new List<ProductCustomerResponse>();
+    //     await using var connection = new SqlConnection(_connectionString);
+    //     await connection.OpenAsync(cancellationToken);
+    //     await using var command = new SqlCommand(sql, connection);
+    //     await using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
-        while (await reader.ReadAsync(cancellationToken))
-        {
-            products.Add(new ProductCustomerResponse(
-                reader.GetString(0),
-                reader.GetString(1),
-                reader.GetDecimal(2),
-                reader.GetInt32(3),
-                reader.GetString(4),
-                reader.GetString(5),
-                reader.GetString(6)
-            ));
-        }
+    //     while (await reader.ReadAsync(cancellationToken))
+    //     {
+    //         products.Add(new ProductCustomerResponse(
+    //             reader.GetString(0),
+    //             reader.GetString(1),
+    //             reader.GetDecimal(2),
+    //             reader.GetInt32(3),
+    //             reader.GetString(4),
+    //             reader.GetString(5),
+    //             reader.GetString(6)
+    //         ));
+    //     }
 
-        return products;
-    }
+    //     return products;
+    // }
 
     public async Task<Products?> GetByCodeAsync(string productCode, CancellationToken cancellationToken)
     {
