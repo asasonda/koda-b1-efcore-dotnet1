@@ -10,7 +10,7 @@ public sealed class AppDbContext : DbContext
     {
     }
 
-    public DbSet<Products> products => Set<Products>();
+    public DbSet<Products> Products => Set<Products>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -19,7 +19,9 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 // builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 // builder.Services.AddSingleton<IProductService, ProductService>();
 
-builder.Services.AddScoped<IProductRepository, SqlProductRepository>();
+// builder.Services.AddScoped<IProductRepository, SqlProductRepository>();
+
+builder.Services.AddScoped<IProductRepository, EFProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<ICustomerRepository, SqlCustomerRepository>();
