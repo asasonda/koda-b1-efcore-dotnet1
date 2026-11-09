@@ -2,11 +2,11 @@ namespace KodaStore.Api.Models;
 
 public sealed class Products
 {
-    public string ProductCode {get; set;}
-    public string Name {get; set;}
-    public decimal Price {get; set;}
-    public int Stock {get; set;}
-    public string Category {get; set;}
+    public string ProductCode {get; private set;}
+    public string Name {get; private set;}
+    public decimal Price {get; private set;}
+    public int Stock {get; private set;}
+    public string Category {get; private set;}
 
     public Products(string productCode, string name, decimal price, int stock, string category)
     {
@@ -36,5 +36,15 @@ public sealed class Products
         Price = price;
         Stock = stock;
         Category = category.Trim();
+    }
+
+    public void UpdateDetail(string name, decimal price, int stock, string category)
+    {
+        var validate = new Products(ProductCode, name, price, stock, category);
+
+        Name = validate.Name;
+        Price = validate.Price;
+        Stock = validate.Stock;
+        Category = validate.Category;
     }
 }

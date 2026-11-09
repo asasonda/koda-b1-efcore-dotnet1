@@ -3,6 +3,7 @@ using KodaStore.Api.Data;
 using KodaStore.Api.Middlewares;
 using KodaStore.Api.Repositories;
 using KodaStore.Api.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +25,17 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICustomerRepository, SqlCustomerRepository>();
 builder.Services.AddScoped<ICustomerServices, CustomerServices>();
 
+
+var connectionString = builder.Configuration.GetConnectionString("eccomercedb") ?? throw new InvalidOperationException("ConnectionString: belum diconfigurasi");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
+
 var app = builder.Build();
 app.UseExceptionHandler();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

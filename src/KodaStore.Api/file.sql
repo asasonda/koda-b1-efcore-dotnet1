@@ -41,5 +41,6 @@ INSERT into dbo.Product (ProductCode, Name, Price, Stock, Category, CustomerId) 
 ('PR001', 'Keyboard', 28000, 48, 'Elektronik', 1),
 ('PR002', 'Mouse', 10000, 10, 'Elektronik', 1);
 
-SELECT * FROM dbo.Product;
+go
+SELECT * FROM dbo.Products;
 SELECT * from dbo.Customers
